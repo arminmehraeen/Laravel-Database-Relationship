@@ -12,7 +12,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::find(1)->categories ;
+        return Post::all();
     }
 
     /**
@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Post::find($id);
     }
 
     /**
