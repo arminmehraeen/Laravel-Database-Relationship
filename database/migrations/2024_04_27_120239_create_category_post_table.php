@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('category_post', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBiginteger('category_id');
             $table->unsignedBiginteger('post_id');
 

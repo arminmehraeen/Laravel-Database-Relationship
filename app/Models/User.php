@@ -27,6 +27,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

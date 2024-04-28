@@ -9,8 +9,6 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $with = ['posts'] ;
-
     public function posts()
     {
         return $this->belongsToMany(Post::class,'category_post');

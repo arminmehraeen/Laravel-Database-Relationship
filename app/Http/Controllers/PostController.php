@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -10,9 +11,9 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): \Illuminate\Database\Eloquent\Collection|array
     {
-        return Post::all();
+        return Post::with('user')->with('categories')->withCount('likes')->get();
     }
 
     /**

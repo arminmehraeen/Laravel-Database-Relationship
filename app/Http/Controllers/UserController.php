@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-
         if($request->has('posts')) {
-            return Category::with('posts')->get();
+            return User::with('posts')->withCount('likedPosts')->get() ;
         }
 
-        return Category::withCount('posts')->get();
+        if($request->has('likes')) {
+            return User::withCount('posts')->with('likedPosts')->get() ;
+        }
+
+        return User::withCount('posts')->withCount('likedPosts')->get() ;
     }
 
     /**
@@ -42,7 +44,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        return Category::find($id);
+        return User::find($id);
     }
 
     /**
@@ -50,7 +52,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-
+        //
     }
 
     /**
