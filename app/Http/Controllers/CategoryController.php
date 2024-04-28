@@ -14,11 +14,14 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
 
+        $categories = [] ;
+
         if($request->has('posts')) {
-            return Category::with('posts')->get();
+            $categories = Category::with('posts')->get();
         }
 
-        return Category::withCount('posts')->get();
+        $categories = Category::withCount('posts')->get();
+        return view('categories.index',compact('categories'));
     }
 
     /**
@@ -42,7 +45,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        return Category::find($id);
+        $category = Category::find($id);
+        return view('categories.show',compact('category'));
     }
 
     /**

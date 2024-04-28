@@ -15,15 +15,17 @@ class CommentController extends Controller
     public function index(Request $request)
     {
 
+        $comments = [] ;
         if($request->has('user')) {
-            return User::find($request->query('user'))->comments;
+            $comments = User::find($request->query('user'))->comments;
         }
 
         if($request->has('post')) {
-            return Post::find($request->query('post'))->comments;
+            $comments = Post::find($request->query('post'))->comments;
         }
 
-        return Comment::with('user')->get() ;
+        $comments = Comment::with('user')->get() ;
+        return view('comments.index',compact('comments'));
     }
 
     /**
@@ -45,9 +47,10 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(string $id)
     {
-        //
+        $comment = Comment::with('post')->with('user')->find($id);
+        return view('comments.show',compact('comment')) ;
     }
 
     /**

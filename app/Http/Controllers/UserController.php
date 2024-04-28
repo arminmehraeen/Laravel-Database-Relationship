@@ -12,15 +12,18 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $users = [];
         if($request->has('posts')) {
-            return User::with('posts')->withCount('likedPosts')->get() ;
+            $users =  User::with('posts')->withCount('likedPosts')->get() ;
         }
 
         if($request->has('likes')) {
-            return User::withCount('posts')->with('likedPosts')->get() ;
+            $users = User::withCount('posts')->with('likedPosts')->get() ;
         }
 
-        return User::withCount('posts')->withCount('likedPosts')->get() ;
+        $users = User::withCount('posts')->withCount('likedPosts')->get() ;
+
+        return view('users.index',compact('users')) ;
     }
 
     /**
@@ -44,7 +47,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return User::find($id);
+        $user = User::with('posts')->find($id);
+        return view('users.show',compact('user')) ;
     }
 
     /**

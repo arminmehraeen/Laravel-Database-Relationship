@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,9 +12,10 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): \Illuminate\Database\Eloquent\Collection|array
+    public function index(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        return Post::with('user')->with('categories')->withCount('likes')->get();
+        $posts = Post::with('user')->with('categories')->withCount('likes')->get();
+        return  view('posts.index',compact('posts')) ;
     }
 
     /**
@@ -37,7 +39,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        return Post::find($id);
+        $post = Post::with('categories')->with('user')->find($id);
+        return view('posts.show',compact('post')) ;
     }
 
     /**
