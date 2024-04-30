@@ -42,7 +42,7 @@ To get started with this project, follow these steps:
 5. Run migrations to create the database tables:
 
     ```bash
-    php artisan migrate
+    php artisan migrate --seed
     ```
 
 6. Serve the application:
