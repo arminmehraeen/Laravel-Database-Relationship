@@ -10,6 +10,8 @@
   <a href="https://github.com/arminmehraeen/Laravel-Database-Relationship/blob/main/LICENSE"><img src="https://img.shields.io/github/license/arminmehraeen/Laravel-Database-Relationship" alt="License"></a>
 </p>
 
+> A practical Laravel blog application that demonstrates the implementation of various database relationships (One-to-One, One-to-Many, Many-to-Many, and Polymorphic) through features like user profiles, blog posts, categories, comments, and likes. Perfect for developers learning Laravel's Eloquent relationships.
+
 ## 📝 About
 
 A comprehensive demonstration of Laravel's database relationship capabilities. This project serves as a practical example of implementing various types of database relationships in Laravel, including:
